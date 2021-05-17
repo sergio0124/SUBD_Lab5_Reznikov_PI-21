@@ -21,5 +21,6 @@ namespace ForumBusinessLogic.ViewModels
         public int PersonId { set; get; }
         public int ThreadId { set; get; }
         public int? MessageId { set; get; }
+        public Dictionary<int, string> Messages { set; get; }
     }
 }
