@@ -4,7 +4,11 @@ using System.Text;
 
 namespace ForumBusinessLogic.BindingModels
 {
-    class TopicBindingModel
+    public class TopicBindingModel
     {
+        public int? Id { set; get; }
+        public string Name { set; get; }
+        public int? TopicId { set; get; }
+        public int? ObjectId { set; get; }
     }
 }

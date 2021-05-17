@@ -4,7 +4,11 @@ using System.Text;
 
 namespace ForumBusinessLogic.BindingModels
 {
-    class PersonBindingModel
+    public class PersonBindingModel
     {
+        public int? Id { set; get; }
+        public string Name { set; get; }
+        public DateTime? RegistrationDate { set; get; }
+        public string Status { set; get; }
     }
 }

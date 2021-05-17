@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ForumDatabaseImplement.Models
 {
-    class TopicStorage
+    class Topic
     {
     }
 }
