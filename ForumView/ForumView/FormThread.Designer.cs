@@ -188,6 +188,7 @@ namespace ForumView
             this.Controls.Add(this.label1);
             this.Name = "FormThread";
             this.Text = "Обсуждение";
+            this.Load += new System.EventHandler(this.FormThread_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -36,7 +36,7 @@ namespace ForumView
             this.comboBoxPerson = new System.Windows.Forms.ComboBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.comboBoxThread = new System.Windows.Forms.ComboBox();
+            this.comboBoxMessage = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -101,20 +101,20 @@ namespace ForumView
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // comboBoxThread
+            // comboBoxMessage
             // 
-            this.comboBoxThread.FormattingEnabled = true;
-            this.comboBoxThread.Location = new System.Drawing.Point(130, 96);
-            this.comboBoxThread.Name = "comboBoxThread";
-            this.comboBoxThread.Size = new System.Drawing.Size(332, 24);
-            this.comboBoxThread.TabIndex = 17;
+            this.comboBoxMessage.FormattingEnabled = true;
+            this.comboBoxMessage.Location = new System.Drawing.Point(130, 96);
+            this.comboBoxMessage.Name = "comboBoxMessage";
+            this.comboBoxMessage.Size = new System.Drawing.Size(332, 24);
+            this.comboBoxMessage.TabIndex = 17;
             // 
             // FormMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 212);
-            this.Controls.Add(this.comboBoxThread);
+            this.Controls.Add(this.comboBoxMessage);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.comboBoxPerson);
@@ -138,6 +138,6 @@ namespace ForumView
         private System.Windows.Forms.ComboBox comboBoxPerson;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.ComboBox comboBoxThread;
+        private System.Windows.Forms.ComboBox comboBoxMessage;
     }
 }
