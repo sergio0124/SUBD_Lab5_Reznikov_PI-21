@@ -1,27 +1,26 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
+using ForumBusinessLogic.BusinessLogics;
+using ForumBusinessLogic.BindingModels;
 
 namespace ForumView
 {
-    public partial class FormThreads : Form
+    public partial class FormObjects : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private ThreadLogic threadLogic;
-        public FormThreads(ThreadLogic thread)
+        private ObjectLogic objectLogic;
+        public FormObjects(ObjectLogic obj)
         {
             InitializeComponent();
-            threadLogic = thread;
+            objectLogic = obj;
             LoadData();
         }
 
@@ -29,10 +28,13 @@ namespace ForumView
         {
             try
             {
-                var list = threadLogic.Read(null);
+                var list = objectLogic.Read(null);
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
+                    dataGridView.Columns[4].Visible = false;
+                    dataGridView.Columns[5].Visible = false;
+                    dataGridView.Columns[6].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -44,7 +46,7 @@ namespace ForumView
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormThreads>();
+            var form = Container.Resolve<FormObject>();
             form.ShowDialog();
         }
 
@@ -52,7 +54,7 @@ namespace ForumView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormThread>();
+                var form = Container.Resolve<FormObject>();
                 form.id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 form.ShowDialog();
                 LoadData();
@@ -69,7 +71,7 @@ namespace ForumView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        threadLogic.Delete(new ThreadBindingModel { Id = id });
+                        objectLogic.Delete(new ObjectBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -81,7 +83,7 @@ namespace ForumView
             }
         }
 
-        private void FormThreads_Load(object sender, EventArgs e)
+        private void FormObjects_Load(object sender, EventArgs e)
         {
             LoadData();
         }

@@ -19,13 +19,15 @@ namespace ForumView
         public new IUnityContainer Container { get; set; }
         public int? id;
         private ObjectLogic obj;
-        public FormObject(ObjectLogic objLogic, int objid)
+        public FormObject(ObjectLogic objLogic)
         {
             InitializeComponent();
             obj = objLogic;
-            id = objid;
             List<ObjectViewModel> list = obj.Read(null);
-            list.Remove(new ObjectViewModel { Id = (int)id });
+            if (id.HasValue)
+            {
+                list.Remove(new ObjectViewModel { Id = (int)id });
+            }
             if (list != null)
             {
                 comboBox.DisplayMember = "Name";
@@ -51,12 +53,21 @@ namespace ForumView
             }
             try
             {
+                if (comboBox.SelectedValue != null) {
+                    obj.CreateOrUpdate(new ObjectBindingModel
+                    {
+                        Description = textBoxDescription.Text,
+                        Name = textBoxName.Text,
+                        Id = id,
+                        ObjectId = Convert.ToInt32(comboBox.SelectedValue)
+                    });
+                    return;
+                }
                 obj.CreateOrUpdate(new ObjectBindingModel
                 {
                     Description = textBoxDescription.Text,
                     Name = textBoxName.Text,
-                    Id = id,
-                    ObjectId = Convert.ToInt32(comboBox.SelectedValue)
+                    Id = id
                 });
             }
             catch (Exception ex)

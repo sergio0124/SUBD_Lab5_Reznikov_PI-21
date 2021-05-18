@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ForumDatabaseImplement.Implements
 {
@@ -16,7 +15,6 @@ namespace ForumDatabaseImplement.Implements
 			using (var context = new ForumDatabase())
 			{
 				return context.Objects
-					.Include(rec=>rec.Topics)
 					.Select(rec => new ObjectViewModel
 					{
 						Id = rec.Id,
@@ -24,12 +22,12 @@ namespace ForumDatabaseImplement.Implements
 						ObjectName=rec.ObjectName,
 						Description=rec.Description,
 						ObjectId=rec.ObjectId,
-						Objects = rec.Objects
-                            .ToDictionary(recOb => (int) recOb.Id,
-							recOb => recOb.Name),
-						Topics = rec.Topics
-							.ToDictionary(recT => (int)recT.Id,
-							recT => recT.Name),
+						//Objects = rec.Objects
+      //                      .ToDictionary(recOb => (int) recOb.Id,
+						//	recOb => recOb.Name),
+						//Topics = rec.Topics
+						//	.ToDictionary(recT => (int)recT.Id,
+						//	recT => recT.Name),
 					})
 					.ToList();
 			}
@@ -160,17 +158,17 @@ namespace ForumDatabaseImplement.Implements
 			obj.Name = model.Name;
 			obj.Description = model.Description;
 			obj.ObjectId = model.ObjectId;
-			if (obj.Id == 0)
+			if (obj.Id==0)
 			{
 				context.Objects.Add(obj);
-				context.SaveChanges();
+				return obj;
 			}
 
 			if (model.Id.HasValue)
 			{
 				context.Remove(context.Objects.Where(rec=>rec.Id==obj.Id));
 				context.Add(obj);
-				context.SaveChanges();
+				return obj;
 			}			
 			return obj;
 		}

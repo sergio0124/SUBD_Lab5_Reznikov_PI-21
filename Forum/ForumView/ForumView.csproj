@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{296F8F83-F437-4238-9A5D-E5F87C3B0213}</ProjectGuid>
+    <ProjectGuid>{9E98834A-C4A4-45D8-B753-E8F3FA9EB966}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ForumView</RootNamespace>
     <AssemblyName>ForumView</AssemblyName>
@@ -35,9 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,14 +44,8 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
-    </Reference>
   </ItemGroup>
-  <ItemGroup>
+   <ItemGroup>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,13 +163,29 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForumBusinessLogic\ForumBusinessLogic.csproj">
-      <Project>{680f7dc9-dabf-4380-8da3-e049b6573a83}</Project>
+      <Project>{b4f1185c-e270-46b0-b76d-09ae92519800}</Project>
       <Name>ForumBusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\ForumDatabaseImplement\ForumDatabaseImplement.csproj">
-      <Project>{03ec9ba2-89d5-4a46-8bfb-cd27125b9aef}</Project>
+      <Project>{b9bd59a9-321b-4a91-90ed-f8ee4e328978}</Project>
       <Name>ForumDatabaseImplement</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore">
+      <Version>3.1.13</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer">
+      <Version>3.1.13</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+      <Version>3.1.13</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Unity">
+      <Version>5.11.10</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

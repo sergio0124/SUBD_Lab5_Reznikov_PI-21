@@ -18,10 +18,8 @@ namespace ForumDatabaseImplement.Models
         [Required]
         public string ThreadName { set; get; }
         public string MessageText { set; get; }
-        [Required]
         public int PersonId { set; get; }
-        [Required]
-        public int ThreadId { set; get; }
+        public int? ThreadId { set; get; }
         public int? MessageId { set; get; }
         [ForeignKey("MessageId")]
         public virtual List<Message> Messages { set; get; }
