@@ -16,5 +16,30 @@ namespace ForumView
         {
             InitializeComponent();
         }
+
+        private void объектыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void пользователиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void обсужденияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void темыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

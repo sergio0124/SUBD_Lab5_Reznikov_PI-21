@@ -16,5 +16,30 @@ namespace ForumView
         {
             InitializeComponent();
         }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRef_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormThreads_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonUpd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a5aa6e9d-d8dc-4a32-8554-267c391a0f95" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumBusinessLogic/ForumBusinessLogic.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumBusinessLogic/ForumBusinessLogic.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumDatabaseImplement/ForumDatabaseImplement.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumDatabaseImplement/ForumDatabaseImplement.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormMain.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormMain.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormObject.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormObject.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormObjects.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormObjects.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormObjects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormPerson.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormPerson.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormPerson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormPerson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormPersons.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormPersons.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormPersons.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormPersons.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormThread.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormThread.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormThread.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormThread.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormThreads.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormThreads.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormThreads.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormThreads.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormTopic.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormTopic.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormTopic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormTopic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormTopics.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormTopics.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/FormTopics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/FormTopics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/ForumView.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/ForumView.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForumView/ForumView/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ForumView/ForumView/Program.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1shYBj9OljDTzE1XLipXP0PTMWt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a5aa6e9d-d8dc-4a32-8554-267c391a0f95" name="Default Changelist" comment="" />
+      <created>1621326160455</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621326160455</updated>
+    </task>
+    <servers />
+  </component>
+</project>

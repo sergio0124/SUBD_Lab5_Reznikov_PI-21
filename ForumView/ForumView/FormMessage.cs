@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ForumView
 {
-    public partial class FormPerson : Form
+    public partial class FormMessage : Form
     {
-        public FormPerson()
+        public FormMessage()
         {
             InitializeComponent();
         }
