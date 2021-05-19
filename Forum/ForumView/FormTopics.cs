@@ -32,10 +32,11 @@ namespace ForumView
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
+                    dataGridView.Columns[4].Visible = false;
+                    dataGridView.Columns[5].Visible = false;
+                    dataGridView.Columns[6].Visible = false;
+                    dataGridView.Columns[7].Visible = false;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[3].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)

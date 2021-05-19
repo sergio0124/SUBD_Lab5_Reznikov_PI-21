@@ -48,6 +48,7 @@ namespace ForumView
         {
             var form = Container.Resolve<FormObject>();
             form.ShowDialog();
+            LoadData();
         }
 
         private void buttonRef_Click(object sender, EventArgs e)

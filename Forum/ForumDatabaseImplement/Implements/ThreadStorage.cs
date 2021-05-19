@@ -15,22 +15,22 @@ namespace ForumDatabaseImplement.Implements
 		{
 			using (var context = new ForumDatabase())
 			{
-				return context.Threads
-					.Include(rec => rec.Messages)
-					.Select(rec => new ThreadViewModel
-					{
-						Id = rec.Id,
-						Name = rec.Name,
-						Description=rec.Description,
-						PersonId = (int)rec.PersonId,
-						PersonName = rec.PersonName,
-						TopicId = rec.TopicId,
-						TopicName=rec.TopicName,
-						Messages = rec.Messages
-							.ToDictionary(recOb => (int)recOb.Id,
-							recOb => recOb.Text),
-					})
-					.ToList();
+				List<ThreadViewModel> result = new List<ThreadViewModel>();
+				foreach (var rec in context.Threads.Include(rec => rec.Messages))
+				{
+					ThreadViewModel mod = new ThreadViewModel { };
+					mod.Id = rec.Id;
+					mod.Name = rec.Name;
+					mod.PersonId = rec.PersonId;
+					mod.PersonName = rec.PersonName;
+					mod.TopicId = rec.TopicId;
+					mod.TopicName = rec.TopicName;
+					mod.Messages = rec.Messages?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Text);
+					result.Add(mod);
+				}
+				return result;
 			}
 		}
 		public List<ThreadViewModel> GetFilteredList(ThreadBindingModel model)
@@ -42,23 +42,24 @@ namespace ForumDatabaseImplement.Implements
 
 			using (var context = new ForumDatabase())
 			{
-				return context.Threads
+				List<ThreadViewModel> result = new List<ThreadViewModel>();
+				foreach (var rec in context.Threads
 					.Include(rec => rec.Messages)
-					.Where(rec => rec.Name.Contains(model.Name))
-					.Select(rec => new ThreadViewModel
-					{
-						Id = rec.Id,
-						Name = rec.Name,
-						Description = rec.Description,
-						PersonId = (int)rec.PersonId,
-						PersonName = rec.PersonName,
-						TopicId = rec.TopicId,
-						TopicName = rec.TopicName,
-						Messages = rec.Messages
-							.ToDictionary(recOb => (int)recOb.Id,
-							recOb => recOb.Text),
-					})
-					.ToList();
+					.Where(rec => rec.Name.Contains(model.Name)))
+				{
+					ThreadViewModel mod = new ThreadViewModel { };
+					mod.Id = rec.Id;
+					mod.Name = rec.Name;
+					mod.PersonId = rec.PersonId;
+					mod.PersonName = rec.PersonName;
+					mod.TopicId = rec.TopicId;
+					mod.TopicName = rec.TopicName;
+					mod.Messages = rec.Messages?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Text);
+					result.Add(mod);
+				}
+				return result;
 			}
 		}
 
@@ -75,22 +76,21 @@ namespace ForumDatabaseImplement.Implements
 					.Include(rec => rec.Messages)
 					.FirstOrDefault(rec => rec.Name.Contains(model.Name) ||
 					rec.Id == model.Id);
+				if (thread == null) return null;
 
-				return thread != null ?
-					new ThreadViewModel
-					{
-						Id = thread.Id,
-						Name = thread.Name,
-						Description = thread.Description,
-						PersonId = (int)thread.PersonId,
-						PersonName = thread.PersonName,
-						TopicId = thread.TopicId,
-						TopicName = thread.TopicName,
-						Messages = thread.Messages
-							.ToDictionary(recOb => (int)recOb.Id,
-							recOb => recOb.Text),
-					} :
-					null;
+				ThreadViewModel mod = new ThreadViewModel { };
+				mod.Id = thread.Id;
+				mod.Name = thread.Name;
+				mod.Description = thread.Description;
+				mod.PersonId = (int)thread.PersonId;
+				mod.PersonName = thread.PersonName;
+				mod.TopicId = thread.TopicId;
+				mod.TopicName = thread.TopicName;
+				mod.Messages = thread.Messages
+					.ToDictionary(recOb => (int)recOb.Id,
+					recOb => recOb.Text);
+				return mod;
+					
 			}
 		}
 
@@ -156,18 +156,19 @@ namespace ForumDatabaseImplement.Implements
 		{
 			thread.Name = model.Name;
 			thread.Description = model.Description;
-			thread.PersonId = (int)model.PersonId;
-			thread.TopicId = model.TopicId;
+			if (model.PersonId.HasValue)
+			{
+				thread.PersonId = (int)model.PersonId;
+				thread.PersonName = context.Persons.FirstOrDefault(rec => rec.Id == model.PersonId).Name;
+			}
+			if (model.TopicId.HasValue)
+			{
+				thread.TopicId = (int)model.TopicId;
+				thread.TopicName = context.Topics.FirstOrDefault(rec => rec.Id == model.PersonId).Name;
+			}
 			if (thread.Id == 0)
 			{
 				context.Threads.Add(thread);
-				context.SaveChanges();
-			}
-
-			if (model.Id.HasValue)
-			{
-				context.Remove(context.Threads.Where(rec => rec.Id == thread.Id));
-				context.Add(thread);
 				context.SaveChanges();
 			}
 			return thread;

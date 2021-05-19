@@ -102,6 +102,7 @@ namespace ForumView
             this.Controls.Add(this.label1);
             this.Name = "FormPerson";
             this.Text = "Создание пользователя";
+            this.Load += new System.EventHandler(this.FormPerson_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

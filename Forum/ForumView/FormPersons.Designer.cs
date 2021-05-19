@@ -100,6 +100,7 @@ namespace ForumView
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormPersons";
             this.Text = "Пользователи";
+            this.Load += new System.EventHandler(this.FormPersons_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

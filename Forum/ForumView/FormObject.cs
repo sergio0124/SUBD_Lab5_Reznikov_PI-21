@@ -24,10 +24,6 @@ namespace ForumView
             InitializeComponent();
             obj = objLogic;
             List<ObjectViewModel> list = obj.Read(null);
-            if (id.HasValue)
-            {
-                list.Remove(new ObjectViewModel { Id = (int)id });
-            }
             if (list != null)
             {
                 comboBox.DisplayMember = "Name";
@@ -76,6 +72,8 @@ namespace ForumView
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -91,8 +89,8 @@ namespace ForumView
                 ObjectViewModel model = obj.Read(new ObjectBindingModel { Id = id })?[0];
                 textBoxDescription.Text = model.Description;
                 textBoxName.Text = model.Name;
+                comboBox.Enabled = false;
             }
         }
-
     }
 }

@@ -42,12 +42,25 @@ namespace ForumView
             }
             try
             {
-                person.CreateOrUpdate(new PersonBindingModel
+                if (id == 0)
                 {
-                    Status = textBox2.Text,
-                    Name = textBox1.Text,
-                    Id = id
-                });
+                    person.CreateOrUpdate(new PersonBindingModel
+                    {
+                        Status = textBox2.Text,
+                        Name = textBox1.Text,
+                        RegistrationDate=DateTime.Now
+                    });
+                }
+                else
+                {
+                    person.CreateOrUpdate(new PersonBindingModel
+                    {
+                        Status = textBox2.Text,
+                        Name = textBox1.Text,
+                        Id = id,
+                        RegistrationDate = DateTime.Now
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -55,6 +68,8 @@ namespace ForumView
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

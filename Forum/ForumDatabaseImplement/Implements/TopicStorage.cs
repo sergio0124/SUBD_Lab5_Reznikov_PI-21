@@ -15,25 +15,25 @@ namespace ForumDatabaseImplement.Implements
 		{
 			using (var context = new ForumDatabase())
 			{
-				return context.Topics
-					.Include(rec => rec.Topics)
-					.ThenInclude(rec=>rec.Threads)
-					.Select(rec => new TopicViewModel
-					{
-						Id = rec.Id,
-						Name = rec.Name,
-						TopicName = rec.TopicName,
-						TopicId = rec.TopicId,
-						ObjectId=rec.ObjectId,
-						ObjectName=rec.ObjectName,
-						Topics = rec.Topics
-							.ToDictionary(recTop => (int)recTop.Id,
-							recTop => recTop.Name),
-						Threads = rec.Threads
-							.ToDictionary(recT => (int)recT.Id,
-							recT => recT.Name),
-					})
-					.ToList();
+				List<TopicViewModel> result = new List<TopicViewModel>();
+				foreach (var rec in context.Topics.Include(rec => rec.Threads).Include(rec=>rec.Topics))
+				{
+					TopicViewModel mod = new TopicViewModel { };
+					mod.Id = rec.Id;
+					mod.Name = rec.Name;
+					mod.ObjectId = rec.ObjectId;
+					mod.ObjectName = rec.ObjectName;
+					mod.TopicId = rec.TopicId;
+					mod.TopicName = rec.TopicName;
+					mod.Topics = rec.Topics?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Name);
+					mod.Threads = rec.Threads?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Name);
+					result.Add(mod);
+				}
+				return result;
 			}
 		}
 		public List<TopicViewModel> GetFilteredList(TopicBindingModel model)
@@ -45,26 +45,29 @@ namespace ForumDatabaseImplement.Implements
 
 			using (var context = new ForumDatabase())
 			{
-				return context.Topics
+				List<TopicViewModel> result = new List<TopicViewModel>();
+				foreach (var rec in context.Topics
 					.Include(rec => rec.Topics)
 					.ThenInclude(rec => rec.Threads)
-					.Where(rec=>rec.Name.Contains(model.Name))
-					.Select(rec => new TopicViewModel
-					{
-						Id = rec.Id,
-						Name = rec.Name,
-						TopicName = rec.TopicName,
-						TopicId = rec.TopicId,
-						ObjectId = rec.ObjectId,
-						ObjectName = rec.ObjectName,
-						Topics = rec.Topics
-							.ToDictionary(recTop => (int)recTop.TopicId,
-							recTop => recTop.TopicName),
-						Threads = rec.Threads
-							.ToDictionary(recT => (int)recT.TopicId,
-							recT => recT.TopicName),
-					})
-					.ToList();
+					.Where(rec => rec.Name.Contains(model.Name)))
+				{
+					TopicViewModel mod = new TopicViewModel { };
+					mod.Id = rec.Id;
+					mod.Name = rec.Name;
+					mod.ObjectId = rec.ObjectId;
+					mod.ObjectName = rec.ObjectName;
+					mod.TopicId = rec.TopicId;
+					mod.TopicName = rec.TopicName;
+					mod.Topics = rec.Topics?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Name);
+					mod.Threads = rec.Threads?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Name);
+					result.Add(mod);
+				}
+				return result;
+
 			}
 		}
 
@@ -82,24 +85,22 @@ namespace ForumDatabaseImplement.Implements
 					.ThenInclude(rec=>rec.Threads)
 					.FirstOrDefault(rec => rec.Name.Contains(model.Name) ||
 					rec.Id == model.Id);
+				if (topic == null) return null;
 
-				return topic != null ?
-					new TopicViewModel
-					{
-						Id = topic.Id,
-						Name = topic.Name,
-						TopicName = topic.TopicName,
-						TopicId = topic.TopicId,
-						ObjectId = topic.ObjectId,
-						ObjectName = topic.ObjectName,
-						Topics = topic.Topics
-							.ToDictionary(recTop => (int)recTop.TopicId,
-							recTop => recTop.TopicName),
-						Threads = topic.Threads
-							.ToDictionary(recT => (int)recT.TopicId,
-							recT => recT.TopicName),
-					} :
-					null;
+				TopicViewModel mod = new TopicViewModel { };
+				mod.Id = topic.Id;
+				mod.Name = topic.Name;
+				mod.ObjectId = topic.ObjectId;
+				mod.ObjectName = topic.ObjectName;
+				mod.TopicId = topic.TopicId;
+				mod.TopicName = topic.TopicName;
+				mod.Topics = topic.Topics?
+					.ToDictionary(recT => (int)recT.Id,
+					recT => recT.Name);
+				mod.Threads = topic.Threads?
+					.ToDictionary(recT => (int)recT.Id,
+					recT => recT.Name);
+				return mod;
 			}
 		}
 
@@ -164,18 +165,19 @@ namespace ForumDatabaseImplement.Implements
 		private Models.Topic CreateModel(TopicBindingModel model, Models.Topic topic, ForumDatabase context)
 		{
 			topic.Name = model.Name;
-			topic.ObjectId = model.ObjectId;
-			topic.TopicId = model.TopicId;
+			if (model.ObjectId!=0)
+			{
+				topic.ObjectId = model.ObjectId;
+				topic.ObjectName = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId).Name;
+			}
+			if (model.TopicId!=0)
+			{
+				topic.TopicId = model.TopicId;
+				topic.TopicName = context.Topics.FirstOrDefault(rec => rec.Id == model.TopicId).Name;
+			}
 			if (topic.Id == 0)
 			{
 				context.Topics.Add(topic);
-				context.SaveChanges();
-			}
-
-			if (model.Id.HasValue)
-			{
-				context.Remove(context.Topics.Where(rec => rec.Id == topic.Id));
-				context.Add(topic);
 				context.SaveChanges();
 			}
 			return topic;

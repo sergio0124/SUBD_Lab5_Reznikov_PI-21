@@ -123,6 +123,7 @@ namespace ForumView
             this.Controls.Add(this.textBoxName);
             this.Name = "FormObject";
             this.Text = "Создание объекта";
+            this.Load += new System.EventHandler(this.FormObject_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

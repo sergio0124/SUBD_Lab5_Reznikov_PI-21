@@ -21,13 +21,12 @@ namespace ForumView
         private TopicLogic topic;
         private MessageLogic message;
         private ThreadLogic thread;
-        public FormThread(TopicLogic topicLogic, MessageLogic messageLogic, ThreadLogic threadLogic, int threadid)
+        public FormThread(TopicLogic topicLogic, MessageLogic messageLogic, ThreadLogic threadLogic)
         {
             InitializeComponent();
             topic = topicLogic;
             message = messageLogic;
             thread = threadLogic;
-            id = threadid;
             List<TopicViewModel> list = topic.Read(null);
             if (list != null)
             {

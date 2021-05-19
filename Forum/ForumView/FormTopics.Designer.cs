@@ -100,6 +100,7 @@ namespace ForumView
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormTopics";
             this.Text = "Темы";
+            this.Load += new System.EventHandler(this.FormTopics_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

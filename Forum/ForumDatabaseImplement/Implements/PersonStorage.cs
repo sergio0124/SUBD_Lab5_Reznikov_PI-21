@@ -15,23 +15,22 @@ namespace ForumDatabaseImplement.Implements
 		{
 			using (var context = new ForumDatabase())
 			{
-				return context.Persons
-					.Include(rec => rec.Threads)
-					.ThenInclude(rec=>rec.Messages)
-					.Select(rec => new PersonViewModel
-					{
-						Id = rec.Id,
-						Name = rec.Name,
-						Status=rec.Status,
-						RegistrationDate=rec.RegistrationDate,
-						Threads = rec.Threads
-							.ToDictionary(recT => (int)recT.Id,
-							recT => recT.Name),
-						Messages = rec.Messages
-							.ToDictionary(recM => (int)recM.Id,
-							recM => recM.Text),
-					})
-					.ToList();
+				List<PersonViewModel> result = new List<PersonViewModel>();
+				foreach (var rec in context.Persons.Include(rec => rec.Messages).Include(rec => rec.Threads))
+				{
+					PersonViewModel mod = new PersonViewModel { };
+					mod.Id = rec.Id;
+					mod.Name = rec.Name;
+					mod.Status = rec.Status;
+					mod.RegistrationDate = rec.RegistrationDate;
+					mod.Threads = rec.Threads?.ToDictionary(recOb => (int)recOb.Id,
+						recOb => recOb.Name);
+					mod.Messages = rec.Messages?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Text);
+					result.Add(mod);
+				}
+				return result;
 			}
 		}
 		public List<PersonViewModel> GetFilteredList(PersonBindingModel model)
@@ -43,24 +42,25 @@ namespace ForumDatabaseImplement.Implements
 
 			using (var context = new ForumDatabase())
 			{
-				return context.Persons
+				List<PersonViewModel> result = new List<PersonViewModel>();
+				foreach (var rec in context.Persons
 					.Include(rec => rec.Threads)
 					.ThenInclude(rec => rec.Messages)
-					.Where(rec => rec.Name.Contains(model.Name))
-					.Select(rec => new PersonViewModel
-					{
-						Id = rec.Id,
-						Name = rec.Name,
-						Status = rec.Status,
-						RegistrationDate = rec.RegistrationDate,
-						Threads = rec.Threads
-							.ToDictionary(recT => (int)recT.Id,
-							recT => recT.Name),
-						Messages = rec.Messages
-							.ToDictionary(recM => (int)recM.Id,
-							recM => recM.Text),
-					})
-					.ToList();
+					.Where(rec => rec.Name.Contains(model.Name)))
+				{
+					PersonViewModel mod = new PersonViewModel { };
+					mod.Id = rec.Id;
+					mod.Name = rec.Name;
+					mod.Status = rec.Status;
+					mod.RegistrationDate = rec.RegistrationDate;
+					mod.Threads = rec.Threads?.ToDictionary(recOb => (int)recOb.Id,
+						recOb => recOb.Name);
+					mod.Messages = rec.Messages?
+						.ToDictionary(recT => (int)recT.Id,
+						recT => recT.Text);
+					result.Add(mod);
+				}
+				return result;
 			}
 		}
 
@@ -76,8 +76,7 @@ namespace ForumDatabaseImplement.Implements
 				var person = context.Persons
 					.Include(rec => rec.Threads)
 					.ThenInclude(rec => rec.Messages)
-					.FirstOrDefault(rec => rec.Name.Contains(model.Name) ||
-					rec.Id == model.Id);
+					.FirstOrDefault(rec => rec.Id == model.Id || rec.Name.Contains(model.Name));
 
 				return person != null ?
 					new PersonViewModel
@@ -86,10 +85,10 @@ namespace ForumDatabaseImplement.Implements
 						Name = person.Name,
 						Status = person.Status,
 						RegistrationDate = person.RegistrationDate,
-						Threads = person.Threads
+						Threads = person.Threads?
 							.ToDictionary(recT => (int)recT.Id,
 							recT => recT.Name),
-						Messages = person.Messages
+						Messages = person.Messages?
 							.ToDictionary(recM => (int)recM.Id,
 							recM => recM.Text),
 					} :
@@ -160,16 +159,9 @@ namespace ForumDatabaseImplement.Implements
 			person.Name = model.Name;
 			person.RegistrationDate = (DateTime)model.RegistrationDate;
 			person.Status = model.Status;
-			if (person.Id == 0)
+			if (!model.Id.HasValue)
 			{
 				context.Persons.Add(person);
-				context.SaveChanges();
-			}
-
-			if (model.Id.HasValue)
-			{
-				context.Remove(context.Persons.Where(rec => rec.Id == person.Id));
-				context.Add(person);
 				context.SaveChanges();
 			}
 			return person;

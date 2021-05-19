@@ -124,6 +124,7 @@ namespace ForumView
             this.Controls.Add(this.label1);
             this.Name = "FormTopic";
             this.Text = "Тема";
+            this.Load += new System.EventHandler(this.FormTopic_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
