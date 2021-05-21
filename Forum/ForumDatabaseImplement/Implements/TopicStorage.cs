@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using ForumDatabaseImplement.Models;
 
 namespace ForumDatabaseImplement.Implements
 {
@@ -16,18 +17,15 @@ namespace ForumDatabaseImplement.Implements
 			using (var context = new ForumDatabase())
 			{
 				List<TopicViewModel> result = new List<TopicViewModel>();
-				foreach (var rec in context.Topics.Include(rec => rec.Threads).Include(rec=>rec.Topics))
+				foreach (var rec in context.Topics.Include(rec => rec.Threads))
 				{
 					TopicViewModel mod = new TopicViewModel { };
 					mod.Id = rec.Id;
 					mod.Name = rec.Name;
 					mod.ObjectId = rec.ObjectId;
 					mod.ObjectName = rec.ObjectName;
-					mod.TopicId = rec.TopicId;
+					mod.TopicId = rec.UpperTopicId;
 					mod.TopicName = rec.TopicName;
-					mod.Topics = rec.Topics?
-						.ToDictionary(recT => (int)recT.Id,
-						recT => recT.Name);
 					mod.Threads = rec.Threads?
 						.ToDictionary(recT => (int)recT.Id,
 						recT => recT.Name);
@@ -47,8 +45,7 @@ namespace ForumDatabaseImplement.Implements
 			{
 				List<TopicViewModel> result = new List<TopicViewModel>();
 				foreach (var rec in context.Topics
-					.Include(rec => rec.Topics)
-					.ThenInclude(rec => rec.Threads)
+					.Include(rec => rec.Threads)
 					.Where(rec => rec.Name.Contains(model.Name)))
 				{
 					TopicViewModel mod = new TopicViewModel { };
@@ -56,11 +53,8 @@ namespace ForumDatabaseImplement.Implements
 					mod.Name = rec.Name;
 					mod.ObjectId = rec.ObjectId;
 					mod.ObjectName = rec.ObjectName;
-					mod.TopicId = rec.TopicId;
+					mod.TopicId = rec.UpperTopicId;
 					mod.TopicName = rec.TopicName;
-					mod.Topics = rec.Topics?
-						.ToDictionary(recT => (int)recT.Id,
-						recT => recT.Name);
 					mod.Threads = rec.Threads?
 						.ToDictionary(recT => (int)recT.Id,
 						recT => recT.Name);
@@ -81,8 +75,7 @@ namespace ForumDatabaseImplement.Implements
 			using (var context = new ForumDatabase())
 			{
 				var topic = context.Topics
-					.Include(rec => rec.Topics)
-					.ThenInclude(rec=>rec.Threads)
+					.Include(rec=>rec.Threads)
 					.FirstOrDefault(rec => rec.Name.Contains(model.Name) ||
 					rec.Id == model.Id);
 				if (topic == null) return null;
@@ -92,11 +85,8 @@ namespace ForumDatabaseImplement.Implements
 				mod.Name = topic.Name;
 				mod.ObjectId = topic.ObjectId;
 				mod.ObjectName = topic.ObjectName;
-				mod.TopicId = topic.TopicId;
+				mod.TopicId = topic.UpperTopicId;
 				mod.TopicName = topic.TopicName;
-				mod.Topics = topic.Topics?
-					.ToDictionary(recT => (int)recT.Id,
-					recT => recT.Name);
 				mod.Threads = topic.Threads?
 					.ToDictionary(recT => (int)recT.Id,
 					recT => recT.Name);
@@ -167,13 +157,14 @@ namespace ForumDatabaseImplement.Implements
 			topic.Name = model.Name;
 			if (model.ObjectId!=0)
 			{
-				topic.ObjectId = model.ObjectId;
-				topic.ObjectName = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId).Name;
+				topic.ObjectId = (int)model.ObjectId;
+				topic.ObjectName = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId)?.Name;
 			}
 			if (model.TopicId!=0)
 			{
-				topic.TopicId = model.TopicId;
-				topic.TopicName = context.Topics.FirstOrDefault(rec => rec.Id == model.TopicId).Name;
+				Topic upperTopic = context.Topics.FirstOrDefault(rec => rec.Id == model.TopicId);
+				topic.UpperTopicId = topic.UpperTopicId;
+				topic.TopicName = topic.Name;
 			}
 			if (topic.Id == 0)
 			{

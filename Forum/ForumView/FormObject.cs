@@ -1,14 +1,15 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ForumBusinessLogic.BindingModels;
+using ForumBusinessLogic.BusinessLogics;
+using ForumBusinessLogic.ViewModels;
 using Unity;
 
 namespace ForumView
@@ -49,7 +50,8 @@ namespace ForumView
             }
             try
             {
-                if (comboBox.SelectedValue != null) {
+                if (comboBox.SelectedValue != null)
+                {
                     obj.CreateOrUpdate(new ObjectBindingModel
                     {
                         Description = textBoxDescription.Text,
@@ -92,5 +94,6 @@ namespace ForumView
                 comboBox.Enabled = false;
             }
         }
+
     }
 }

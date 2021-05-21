@@ -17,6 +17,5 @@ namespace ForumBusinessLogic.ViewModels
         public int? TopicId { set; get; }
         public int? ObjectId { set; get; }
         public Dictionary<int, string> Threads { set; get; }
-        public Dictionary<int, string> Topics { set; get; }
     }
 }

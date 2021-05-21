@@ -45,8 +45,8 @@ namespace ForumView
             this.справочникиToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // справочникиToolStripMenuItem
@@ -63,28 +63,28 @@ namespace ForumView
             // объектыToolStripMenuItem
             // 
             this.объектыToolStripMenuItem.Name = "объектыToolStripMenuItem";
-            this.объектыToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+            this.объектыToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.объектыToolStripMenuItem.Text = "Объекты";
             this.объектыToolStripMenuItem.Click += new System.EventHandler(this.объектыToolStripMenuItem_Click);
             // 
             // пользователиToolStripMenuItem
             // 
             this.пользователиToolStripMenuItem.Name = "пользователиToolStripMenuItem";
-            this.пользователиToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+            this.пользователиToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.пользователиToolStripMenuItem.Text = "Пользователи";
             this.пользователиToolStripMenuItem.Click += new System.EventHandler(this.пользователиToolStripMenuItem_Click);
             // 
             // обсужденияToolStripMenuItem
             // 
             this.обсужденияToolStripMenuItem.Name = "обсужденияToolStripMenuItem";
-            this.обсужденияToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+            this.обсужденияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.обсужденияToolStripMenuItem.Text = "Обсуждения";
             this.обсужденияToolStripMenuItem.Click += new System.EventHandler(this.обсужденияToolStripMenuItem_Click);
             // 
             // темыToolStripMenuItem
             // 
             this.темыToolStripMenuItem.Name = "темыToolStripMenuItem";
-            this.темыToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+            this.темыToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.темыToolStripMenuItem.Text = "Темы";
             this.темыToolStripMenuItem.Click += new System.EventHandler(this.темыToolStripMenuItem_Click);
             // 
@@ -94,9 +94,8 @@ namespace ForumView
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "Главная форма";
+            this.Text = "FormMain";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

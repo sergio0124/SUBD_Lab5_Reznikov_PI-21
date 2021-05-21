@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using ForumDatabaseImplement.Models;
 
 namespace ForumDatabaseImplement.Implements
 {
@@ -16,7 +17,6 @@ namespace ForumDatabaseImplement.Implements
 			using (var context = new ForumDatabase())
 			{
 				return context.Messages
-					.Include(rec=>rec.Messages)
 					.Select(rec => new MessageViewModel
 					{
 						Id = rec.Id,
@@ -27,10 +27,7 @@ namespace ForumDatabaseImplement.Implements
 						PersonName=rec.PersonName,
 						ThreadName=rec.ThreadName,
 						MessageText=rec.MessageText,
-						MessageId=rec.MessageId,
-						Messages = rec.Messages
-							.ToDictionary(recOb => (int)recOb.Id,
-							recOb => recOb.Text)
+						MessageId=rec.UpperMessageId
 					})
 					.ToList();
 			}
@@ -45,7 +42,6 @@ namespace ForumDatabaseImplement.Implements
 			using (var context = new ForumDatabase())
 			{
 				return context.Messages
-					.Include(rec => rec.Messages)
 					.Where(rec=>rec.Text.Contains(model.Text))
 					.Select(rec => new MessageViewModel
 					{
@@ -57,10 +53,7 @@ namespace ForumDatabaseImplement.Implements
 						PersonName = rec.PersonName,
 						ThreadName = rec.ThreadName,
 						MessageText = rec.MessageText,
-						MessageId = rec.MessageId,
-						Messages = rec.Messages
-							.ToDictionary(recOb => (int)recOb.Id,
-							recOb => recOb.Text)
+						MessageId = rec.UpperMessageId
 					})
 					.ToList();
 			}
@@ -76,7 +69,6 @@ namespace ForumDatabaseImplement.Implements
 			using (var context = new ForumDatabase())
 			{
 				var message = context.Messages
-					.Include(rec => rec.Messages)
 					.FirstOrDefault(rec => rec.Text.Contains(model.Text) ||
 					rec.Id == model.Id);
 
@@ -91,10 +83,7 @@ namespace ForumDatabaseImplement.Implements
 						PersonName = message.PersonName,
 						ThreadName = message.ThreadName,
 						MessageText = message.MessageText,
-						MessageId = message.MessageId,
-						Messages = message.Messages
-							.ToDictionary(recOb => (int)recOb.Id,
-							recOb => recOb.Text)
+						MessageId = message.UpperMessageId
 					} :
 					null;
 			}
@@ -163,7 +152,7 @@ namespace ForumDatabaseImplement.Implements
 			message.Text = model.Text;
 			message.ThreadId = (int)model.ThreadId;
 			message.PersonId = (int)model.PersonId;
-			message.MessageId = (int)model.MessageId;
+			message.UpperMessageId = (int)model.MessageId;
 			if (message.Id == 0)
 			{
 				context.Messages.Add(message);

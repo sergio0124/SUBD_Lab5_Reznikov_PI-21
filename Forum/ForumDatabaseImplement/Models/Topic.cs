@@ -13,11 +13,9 @@ namespace ForumDatabaseImplement.Models
         public string Name { set; get; }
         public string TopicName { set; get; }
         public string ObjectName { set; get; }
-        public int? TopicId { set; get; }
-        public int? ObjectId { set; get; }
+        public int UpperTopicId { set; get; }
+        public int ObjectId { set; get; }
         [ForeignKey("TopicId")]
         public virtual List<Thread> Threads { set; get; }
-        [ForeignKey("TopicId")]
-        public virtual List<Topic> Topics { set; get; }
     }
 }

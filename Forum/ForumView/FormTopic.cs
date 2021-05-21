@@ -21,7 +21,7 @@ namespace ForumView
         public int? id;
         private TopicLogic topic;
         private ObjectLogic objects;
-        public FormTopic(TopicLogic topicLogic,ObjectLogic objectLogic)
+        public FormTopic(TopicLogic topicLogic, ObjectLogic objectLogic)
         {
             InitializeComponent();
             topic = topicLogic;
@@ -64,7 +64,8 @@ namespace ForumView
                         TopicId = Convert.ToInt32(comboBoxTopic.SelectedValue)
                     });
                 }
-                else {
+                else
+                {
                     topic.CreateOrUpdate(new TopicBindingModel
                     {
                         Name = textBox.Text,
@@ -97,7 +98,7 @@ namespace ForumView
                 textBox.Text = model.Name;
                 comboBoxObject.Enabled = false;
                 comboBoxTopic.Enabled = false;
-            }            
+            }
         }
     }
 }

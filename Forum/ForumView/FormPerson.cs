@@ -48,7 +48,7 @@ namespace ForumView
                     {
                         Status = textBox2.Text,
                         Name = textBox1.Text,
-                        RegistrationDate=DateTime.Now
+                        RegistrationDate = DateTime.Now
                     });
                 }
                 else

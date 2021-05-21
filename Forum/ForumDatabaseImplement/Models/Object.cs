@@ -14,9 +14,7 @@ namespace ForumDatabaseImplement.Models
         [Required]
         public string Description { set; get; }
         public string ObjectName { set; get; }
-        public int? ObjectId { set; get; }
-        [ForeignKey("ObjectId")]
-        public virtual List<Object> Objects { set; get; }
+        public int UpperObjectId { set; get; }
         [ForeignKey("ObjectId")]
         public virtual List<Topic> Topics { set; get; }
     }

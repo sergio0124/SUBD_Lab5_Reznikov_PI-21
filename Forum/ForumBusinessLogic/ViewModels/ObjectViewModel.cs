@@ -15,7 +15,6 @@ namespace ForumBusinessLogic.ViewModels
         [DisplayName("Название над-Объекта")]
         public string ObjectName { set; get; }
         public int? ObjectId { set; get; }
-        public Dictionary<int, string> Objects { set; get; }
         public Dictionary<int, string> Topics { set; get; }
     }
 }

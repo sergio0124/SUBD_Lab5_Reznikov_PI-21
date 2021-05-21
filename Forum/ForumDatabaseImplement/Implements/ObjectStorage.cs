@@ -15,16 +15,14 @@ namespace ForumDatabaseImplement.Implements
             using (var context = new ForumDatabase())
             {
                 List<ObjectViewModel> result = new List<ObjectViewModel>();
-                foreach (var rec in context.Objects.Include(rec=>rec.Objects).Include(rec=>rec.Topics))
+                foreach (var rec in context.Objects.Include(rec=>rec.Topics))
                 {
                     ObjectViewModel model = new ObjectViewModel { };
                     model.Id = rec.Id;
                     model.Name = rec.Name;
                     model.ObjectName = rec.ObjectName;
                     model.Description = rec.Description;
-                    model.ObjectId = rec.ObjectId;
-                    model.Objects = rec.Objects?.ToDictionary(recOb => (int)recOb.Id,
-                        recOb => recOb.Name);
+                    model.ObjectId = rec.UpperObjectId;
                     model.Topics = rec.Topics?
                         .ToDictionary(recT => (int)recT.Id,
                         recT => recT.Name);
@@ -43,16 +41,14 @@ namespace ForumDatabaseImplement.Implements
             using (var context = new ForumDatabase())
             {
                 List<ObjectViewModel> result = new List<ObjectViewModel>();
-                foreach (var rec in context.Objects.Include(rec => rec.Objects).Include(rec => rec.Topics))
+                foreach (var rec in context.Objects.Include(rec => rec.Topics))
                 {
                     ObjectViewModel mod = new ObjectViewModel { };
                     mod.Id = rec.Id;
                     mod.Name = rec.Name;
                     mod.ObjectName = rec.ObjectName;
                     mod.Description = rec.Description;
-                    mod.ObjectId = rec.ObjectId;
-                    mod.Objects = rec.Objects?.ToDictionary(recOb => (int)recOb.Id,
-                        recOb => recOb.Name);
+                    mod.ObjectId = rec.UpperObjectId;
                     mod.Topics = rec.Topics?
                         .ToDictionary(recT => (int)recT.Id,
                         recT => recT.Name);
@@ -73,7 +69,6 @@ namespace ForumDatabaseImplement.Implements
             {
                 var obj = context.Objects
                     .Include(rec => rec.Topics)
-                    .Include(rec => rec.Objects)
                     .FirstOrDefault(rec => rec.Name.Contains(model.Name) ||
                     rec.Id == model.Id);
 
@@ -84,10 +79,7 @@ namespace ForumDatabaseImplement.Implements
                         Name = obj.Name,
                         ObjectName = obj.ObjectName,
                         Description = obj.Description,
-                        ObjectId = obj.ObjectId,
-                        Objects = obj.Objects?
-                            .ToDictionary(recOb => (int)recOb.Id,
-                            recOb => recOb.Name),
+                        ObjectId = obj.UpperObjectId,
                         Topics = obj.Topics
                             .ToDictionary(recT => (int)recT.Id,
                             recT => recT.Name),
@@ -158,8 +150,11 @@ namespace ForumDatabaseImplement.Implements
         {
             obj.Name = model.Name;
             obj.Description = model.Description;
-            obj.ObjectId = model.ObjectId;
-            obj.ObjectName = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId)?.Name;
+            obj.UpperObjectId = (int)model.ObjectId;
+            Models.Object o = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId);
+            if (o != null) {
+                obj.ObjectName = o.Name;
+            }           
             if (obj.Id == 0)
             {
                 context.Objects.Add(obj);

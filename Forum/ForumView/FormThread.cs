@@ -38,7 +38,8 @@ namespace ForumView
             LoadData();
         }
 
-        private void LoadData() {
+        private void LoadData()
+        {
             if (id.HasValue)
             {
                 Dictionary<int, string> mes = thread.Read(new ThreadBindingModel { Id = id })?[0].Messages;
@@ -58,7 +59,8 @@ namespace ForumView
 
         private void buttonRef_Click(object sender, EventArgs e)
         {
-            if (comboBox.SelectedValue==null) {
+            if (comboBox.SelectedValue == null)
+            {
                 MessageBox.Show("Выберите сообщение", "Ошибка",
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -79,7 +81,7 @@ namespace ForumView
                 {
                     try
                     {
-                        message.Delete(new MessageBindingModel { Id= Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value) });
+                        message.Delete(new MessageBindingModel { Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value) });
                     }
                     catch (Exception ex)
                     {
@@ -98,12 +100,14 @@ namespace ForumView
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (textBoxName.Text == null) {
+            if (textBoxName.Text == null)
+            {
                 MessageBox.Show("Заполните поле Название", "Ошибка",
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (textBoxDescription == null) {
+            if (textBoxDescription == null)
+            {
                 MessageBox.Show("Заполните поле Описание", "Ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -118,7 +122,8 @@ namespace ForumView
                     TopicId = Convert.ToInt32(comboBox.SelectedValue)
                 });
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show("Exception occured", "Ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -129,11 +134,6 @@ namespace ForumView
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        private void FormThread_Load(object sender, EventArgs e)
-        {
-            LoadData();
         }
     }
 }

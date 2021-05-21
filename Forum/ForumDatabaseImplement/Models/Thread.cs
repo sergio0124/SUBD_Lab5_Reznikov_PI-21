@@ -18,7 +18,7 @@ namespace ForumDatabaseImplement.Models
         public string PersonName { set; get; }
         [Required]
         public int PersonId { set; get; }
-        public int? TopicId { set; get; }
+        public int TopicId { set; get; }
         [ForeignKey("ThreadId")]
         public virtual List<Message> Messages { set; get; }
     }

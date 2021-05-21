@@ -22,7 +22,7 @@ namespace ForumView
         private readonly MessageLogic logic;
         public int? id;
         public int ThreadId;
-        public FormMessage(MessageLogic logics,PersonLogic personLogic)
+        public FormMessage(MessageLogic logics, PersonLogic personLogic)
         {
             InitializeComponent();
             logic = logics;
@@ -50,7 +50,8 @@ namespace ForumView
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -61,7 +62,8 @@ namespace ForumView
                MessageBoxIcon.Error);
                 return;
             }
-            if (!comboBoxPerson.Focused) {
+            if (!comboBoxPerson.Focused)
+            {
                 MessageBox.Show("Выберите пользователя", "Ошибка", MessageBoxButtons.OK,
                   MessageBoxIcon.Error);
                 return;
@@ -72,10 +74,10 @@ namespace ForumView
                 {
                     Id = id,
                     Text = textBox1.Text,
-                    DateCreate=DateTime.Now,
-                    PersonId=Convert.ToInt32(comboBoxPerson.Text),
+                    DateCreate = DateTime.Now,
+                    PersonId = Convert.ToInt32(comboBoxPerson.Text),
                     MessageId = Convert.ToInt32(comboBoxMessage.Text),
-                    ThreadId=ThreadId
+                    ThreadId = ThreadId
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E98834A-C4A4-45D8-B753-E8F3FA9EB966}</ProjectGuid>
+    <ProjectGuid>{E1DF165D-79D3-48C3-8A59-D732EFE2BB10}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ForumView</RootNamespace>
     <AssemblyName>ForumView</AssemblyName>
@@ -45,7 +45,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-   <ItemGroup>
+  <ItemGroup>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,7 +147,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -162,30 +161,33 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForumBusinessLogic\ForumBusinessLogic.csproj">
-      <Project>{b4f1185c-e270-46b0-b76d-09ae92519800}</Project>
-      <Name>ForumBusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ForumDatabaseImplement\ForumDatabaseImplement.csproj">
-      <Project>{b9bd59a9-321b-4a91-90ed-f8ee4e328978}</Project>
-      <Name>ForumDatabaseImplement</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore">
-      <Version>3.1.13</Version>
+      <Version>3.1.15</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer">
-      <Version>3.1.13</Version>
+      <Version>3.1.15</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
-      <Version>3.1.13</Version>
+      <Version>3.1.15</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Unity">
       <Version>5.11.10</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForumBusinessLogic\ForumBusinessLogic.csproj">
+      <Project>{ddc4cf40-5ca2-4522-85c4-d1781d294aec}</Project>
+      <Name>ForumBusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForumDatabaseImplement\ForumDatabaseImplement.csproj">
+      <Project>{82e933cf-e030-4e77-a813-4c8744704c19}</Project>
+      <Name>ForumDatabaseImplement</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
