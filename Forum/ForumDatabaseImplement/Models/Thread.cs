@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ForumDatabaseImplement.Models
+namespace ForumForumDatabaseImplement.Models
 {
     public class Thread
     {
@@ -16,9 +16,8 @@ namespace ForumDatabaseImplement.Models
         public string TopicName { set; get; }
         [Required]
         public string PersonName { set; get; }
-        [Required]
-        public int PersonId { set; get; }
-        public int TopicId { set; get; }
+        public int? PersonId { set; get; }
+        public int? TopicId { set; get; }
         [ForeignKey("ThreadId")]
         public virtual List<Message> Messages { set; get; }
     }

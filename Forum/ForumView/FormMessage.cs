@@ -1,6 +1,6 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +21,7 @@ namespace ForumView
         public int Id { set { id = value; } }
         private readonly MessageLogic logic;
         public int? id;
-        public int ThreadId;
+        public int? ThrId;
         public FormMessage(MessageLogic logics, PersonLogic personLogic)
         {
             InitializeComponent();
@@ -35,15 +35,11 @@ namespace ForumView
                 comboBoxPerson.SelectedItem = null;
             }
             List<MessageViewModel> messageViews = logic.Read(null);
-            if (id.HasValue)
-            {
-                messageViews.Remove(new MessageViewModel { Id = (int)id });
-            }
-            if (list != null)
+            if (messageViews != null)
             {
                 comboBoxMessage.DisplayMember = "Text";
                 comboBoxMessage.ValueMember = "Id";
-                comboBoxMessage.DataSource = list;
+                comboBoxMessage.DataSource = messageViews;
                 comboBoxMessage.SelectedItem = null;
             }
         }
@@ -62,7 +58,7 @@ namespace ForumView
                MessageBoxIcon.Error);
                 return;
             }
-            if (!comboBoxPerson.Focused)
+            if (comboBoxPerson.SelectedValue==null)
             {
                 MessageBox.Show("Выберите пользователя", "Ошибка", MessageBoxButtons.OK,
                   MessageBoxIcon.Error);
@@ -70,15 +66,26 @@ namespace ForumView
             }
             try
             {
-                logic.CreateOrUpdate(new MessageBindingModel
+                if (!id.HasValue)
                 {
-                    Id = id,
-                    Text = textBox1.Text,
-                    DateCreate = DateTime.Now,
-                    PersonId = Convert.ToInt32(comboBoxPerson.Text),
-                    MessageId = Convert.ToInt32(comboBoxMessage.Text),
-                    ThreadId = ThreadId
-                });
+                    logic.CreateOrUpdate(new MessageBindingModel
+                    {
+                        Id = id,
+                        Text = textBox1.Text,
+                        DateCreate = DateTime.Now,
+                        PersonId = Convert.ToInt32(comboBoxPerson.SelectedValue),
+                        MessageId = Convert.ToInt32(comboBoxMessage.SelectedValue),
+                        ThreadId = ThrId
+                    });
+                }
+                else {
+                    logic.CreateOrUpdate(new MessageBindingModel
+                    {
+                        Text = textBox1.Text,
+                        DateCreate = DateTime.Now
+                    });
+                }
+               
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

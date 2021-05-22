@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ForumDatabaseImplement.Models
+namespace ForumForumDatabaseImplement.Models
 {
     public class Message
     {
@@ -18,10 +18,8 @@ namespace ForumDatabaseImplement.Models
         [Required]
         public string ThreadName { set; get; }
         public string MessageText { set; get; }
-        [Required]
         public int PersonId { set; get; }
-        [Required]
-        public int ThreadId { set; get; }
-        public int UpperMessageId { set; get; }
+        public int? ThreadId { set; get; }
+        public int? UpperMessageId { set; get; }
     }
 }

@@ -1,13 +1,13 @@
-﻿using ForumBusinessLogic.Interfaces;
-using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.Interfaces;
+using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace ForumDatabaseImplement.Implements
+namespace ForumForumDatabaseImplement.Implements
 {
     public class ThreadStorage: IThreadStorage
     {
@@ -21,7 +21,8 @@ namespace ForumDatabaseImplement.Implements
 					ThreadViewModel mod = new ThreadViewModel { };
 					mod.Id = rec.Id;
 					mod.Name = rec.Name;
-					mod.PersonId = rec.PersonId;
+					mod.Description = rec.Description;
+					mod.PersonId = (int)rec.PersonId;
 					mod.PersonName = rec.PersonName;
 					mod.TopicId = rec.TopicId;
 					mod.TopicName = rec.TopicName;
@@ -50,7 +51,8 @@ namespace ForumDatabaseImplement.Implements
 					ThreadViewModel mod = new ThreadViewModel { };
 					mod.Id = rec.Id;
 					mod.Name = rec.Name;
-					mod.PersonId = rec.PersonId;
+					mod.Description = rec.Description;
+					mod.PersonId = (int)rec.PersonId;
 					mod.PersonName = rec.PersonName;
 					mod.TopicId = rec.TopicId;
 					mod.TopicName = rec.TopicName;
@@ -164,7 +166,7 @@ namespace ForumDatabaseImplement.Implements
 			if (model.TopicId.HasValue)
 			{
 				thread.TopicId = (int)model.TopicId;
-				thread.TopicName = context.Topics.FirstOrDefault(rec => rec.Id == model.PersonId).Name;
+				thread.TopicName = context.Topics.FirstOrDefault(rec => rec.Id == model.TopicId)?.Name;
 			}
 			if (thread.Id == 0)
 			{

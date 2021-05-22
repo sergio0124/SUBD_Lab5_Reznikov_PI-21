@@ -1,11 +1,11 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.Interfaces;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.Interfaces;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ForumBusinessLogic.BusinessLogics
+namespace ForumForumBusinessLogic.BusinessLogics
 {
     public class ThreadLogic
     {

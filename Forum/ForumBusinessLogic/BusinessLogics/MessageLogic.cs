@@ -1,11 +1,11 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.Interfaces;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.Interfaces;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ForumBusinessLogic.BusinessLogics
+namespace ForumForumBusinessLogic.BusinessLogics
 {
     public class MessageLogic
     {
@@ -30,14 +30,6 @@ namespace ForumBusinessLogic.BusinessLogics
 
         public void CreateOrUpdate(MessageBindingModel model)
         {
-            var element = _messageStorage.GetElement(new MessageBindingModel
-            {
-                Text = model.Text
-            });
-            if (element != null && element.Id != model.Id)
-            {
-                throw new Exception("Уже есть сообщение с таким названием");
-            }
             if (model.Id.HasValue)
             {
                 _messageStorage.Update(model);

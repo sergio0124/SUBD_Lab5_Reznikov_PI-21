@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
-using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
+using ForumForumBusinessLogic.BindingModels;
 
 namespace ForumView
 {
@@ -34,8 +34,8 @@ namespace ForumView
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[4].Visible = false;
+                    dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[5].Visible = false;
-                    dataGridView.Columns[6].Visible = false;
                 }
             }
             catch (Exception ex)

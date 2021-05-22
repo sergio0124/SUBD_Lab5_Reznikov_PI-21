@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace ForumBusinessLogic.BindingModels
+namespace ForumForumBusinessLogic.BindingModels
 {
     public class ThreadBindingModel
     {

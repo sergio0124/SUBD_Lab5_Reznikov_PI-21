@@ -1,13 +1,13 @@
-﻿using ForumBusinessLogic.Interfaces;
-using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.Interfaces;
+using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace ForumDatabaseImplement.Implements
+namespace ForumForumDatabaseImplement.Implements
 {
     public class PersonStorage: IPersonStorage
     {

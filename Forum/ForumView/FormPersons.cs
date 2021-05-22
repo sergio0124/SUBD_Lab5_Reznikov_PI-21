@@ -1,5 +1,5 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,10 +46,9 @@ namespace ForumView
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormPerson>();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                LoadData();
-            }
+            form.ShowDialog();
+            LoadData();
+
         }
 
         private void buttonRef_Click(object sender, EventArgs e)

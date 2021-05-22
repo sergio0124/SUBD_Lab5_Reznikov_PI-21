@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ForumBusinessLogic.BindingModels
+namespace ForumForumBusinessLogic.BindingModels
 {
     public class TopicBindingModel
     {

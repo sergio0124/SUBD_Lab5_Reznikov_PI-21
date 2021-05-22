@@ -1,10 +1,10 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ForumBusinessLogic.Interfaces
+namespace ForumForumBusinessLogic.Interfaces
 {
     public interface ITopicStorage
     {

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.ViewModels;
+using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
+using ForumForumBusinessLogic.ViewModels;
 using Unity;
 
 namespace ForumView

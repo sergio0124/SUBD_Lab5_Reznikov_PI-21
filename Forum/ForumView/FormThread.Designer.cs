@@ -42,12 +42,16 @@ namespace ForumView
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxPerson = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(246, 436);
+            this.buttonSave.Location = new System.Drawing.Point(246, 490);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(133, 37);
             this.buttonSave.TabIndex = 28;
@@ -57,7 +61,7 @@ namespace ForumView
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(385, 436);
+            this.buttonCancel.Location = new System.Drawing.Point(385, 490);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(133, 37);
             this.buttonCancel.TabIndex = 27;
@@ -70,7 +74,10 @@ namespace ForumView
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(26, 129);
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Key,
+            this.Value});
+            this.dataGridView.Location = new System.Drawing.Point(26, 183);
             this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
@@ -81,7 +88,7 @@ namespace ForumView
             // 
             // buttonUpd
             // 
-            this.buttonUpd.Location = new System.Drawing.Point(525, 296);
+            this.buttonUpd.Location = new System.Drawing.Point(525, 350);
             this.buttonUpd.Name = "buttonUpd";
             this.buttonUpd.Size = new System.Drawing.Size(91, 23);
             this.buttonUpd.TabIndex = 25;
@@ -91,7 +98,7 @@ namespace ForumView
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(525, 249);
+            this.buttonDel.Location = new System.Drawing.Point(525, 303);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(91, 23);
             this.buttonDel.TabIndex = 24;
@@ -101,7 +108,7 @@ namespace ForumView
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(525, 202);
+            this.buttonRef.Location = new System.Drawing.Point(525, 256);
             this.buttonRef.Name = "buttonRef";
             this.buttonRef.Size = new System.Drawing.Size(91, 23);
             this.buttonRef.TabIndex = 23;
@@ -111,7 +118,7 @@ namespace ForumView
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(525, 153);
+            this.buttonAdd.Location = new System.Drawing.Point(525, 207);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(91, 23);
             this.buttonAdd.TabIndex = 22;
@@ -168,11 +175,42 @@ namespace ForumView
             this.label1.TabIndex = 16;
             this.label1.Text = "Название";
             // 
+            // comboBoxPerson
+            // 
+            this.comboBoxPerson.FormattingEnabled = true;
+            this.comboBoxPerson.Location = new System.Drawing.Point(160, 128);
+            this.comboBoxPerson.Name = "comboBoxPerson";
+            this.comboBoxPerson.Size = new System.Drawing.Size(295, 24);
+            this.comboBoxPerson.TabIndex = 30;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 131);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 17);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Создатель";
+            // 
+            // Key
+            // 
+            this.Key.HeaderText = "Id";
+            this.Key.MinimumWidth = 6;
+            this.Key.Name = "Key";
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Текст";
+            this.Value.MinimumWidth = 6;
+            this.Value.Name = "Value";
+            // 
             // FormThread
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 488);
+            this.ClientSize = new System.Drawing.Size(640, 532);
+            this.Controls.Add(this.comboBoxPerson);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.dataGridView);
@@ -209,5 +247,9 @@ namespace ForumView
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxPerson;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Key;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
     }
 }

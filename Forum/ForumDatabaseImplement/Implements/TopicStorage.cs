@@ -1,14 +1,14 @@
-﻿using ForumBusinessLogic.Interfaces;
-using ForumBusinessLogic.ViewModels;
-using ForumBusinessLogic.BindingModels;
+﻿using ForumForumBusinessLogic.Interfaces;
+using ForumForumBusinessLogic.ViewModels;
+using ForumForumBusinessLogic.BindingModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ForumDatabaseImplement.Models;
+using ForumForumDatabaseImplement.Models;
 
-namespace ForumDatabaseImplement.Implements
+namespace ForumForumDatabaseImplement.Implements
 {
     public class TopicStorage: ITopicStorage
     {
@@ -23,9 +23,9 @@ namespace ForumDatabaseImplement.Implements
 					mod.Id = rec.Id;
 					mod.Name = rec.Name;
 					mod.ObjectId = rec.ObjectId;
-					mod.ObjectName = rec.ObjectName;
+					mod.ObjectName = context.Objects.FirstOrDefault(recrec=>recrec.Id==rec.ObjectId)?.Name;
 					mod.TopicId = rec.UpperTopicId;
-					mod.TopicName = rec.TopicName;
+					mod.TopicName = context.Topics.FirstOrDefault(recrec => recrec.Id == rec.UpperTopicId)?.Name;
 					mod.Threads = rec.Threads?
 						.ToDictionary(recT => (int)recT.Id,
 						recT => recT.Name);
@@ -52,9 +52,9 @@ namespace ForumDatabaseImplement.Implements
 					mod.Id = rec.Id;
 					mod.Name = rec.Name;
 					mod.ObjectId = rec.ObjectId;
-					mod.ObjectName = rec.ObjectName;
+					mod.ObjectName = context.Objects.FirstOrDefault(recrec => recrec.Id == rec.ObjectId)?.Name;
 					mod.TopicId = rec.UpperTopicId;
-					mod.TopicName = rec.TopicName;
+					mod.TopicName = context.Topics.FirstOrDefault(recrec => recrec.Id == rec.UpperTopicId)?.Name;
 					mod.Threads = rec.Threads?
 						.ToDictionary(recT => (int)recT.Id,
 						recT => recT.Name);
@@ -84,9 +84,9 @@ namespace ForumDatabaseImplement.Implements
 				mod.Id = topic.Id;
 				mod.Name = topic.Name;
 				mod.ObjectId = topic.ObjectId;
-				mod.ObjectName = topic.ObjectName;
+				mod.ObjectName = context.Objects.FirstOrDefault(recrec => recrec.Id == topic.ObjectId)?.Name;
 				mod.TopicId = topic.UpperTopicId;
-				mod.TopicName = topic.TopicName;
+				mod.TopicName = context.Topics.FirstOrDefault(recrec => recrec.Id == topic.UpperTopicId)?.Name;
 				mod.Threads = topic.Threads?
 					.ToDictionary(recT => (int)recT.Id,
 					recT => recT.Name);
@@ -158,13 +158,10 @@ namespace ForumDatabaseImplement.Implements
 			if (model.ObjectId!=0)
 			{
 				topic.ObjectId = (int)model.ObjectId;
-				topic.ObjectName = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId)?.Name;
 			}
 			if (model.TopicId!=0)
 			{
-				Topic upperTopic = context.Topics.FirstOrDefault(rec => rec.Id == model.TopicId);
-				topic.UpperTopicId = topic.UpperTopicId;
-				topic.TopicName = topic.Name;
+				topic.UpperTopicId = model.TopicId;
 			}
 			if (topic.Id == 0)
 			{

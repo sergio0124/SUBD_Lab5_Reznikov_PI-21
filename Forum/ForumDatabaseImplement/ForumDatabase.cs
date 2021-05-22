@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ForumDatabaseImplement.Models;
+using ForumForumDatabaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ForumDatabaseImplement
+namespace ForumForumDatabaseImplement
 {
     class ForumDatabase : DbContext
     {
@@ -12,7 +12,7 @@ namespace ForumDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ForumDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ForumDatabasefdfd;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }

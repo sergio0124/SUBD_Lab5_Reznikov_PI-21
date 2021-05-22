@@ -1,5 +1,5 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +35,6 @@ namespace ForumView
                     dataGridView.Columns[4].Visible = false;
                     dataGridView.Columns[5].Visible = false;
                     dataGridView.Columns[6].Visible = false;
-                    dataGridView.Columns[7].Visible = false;
                     dataGridView.Columns[0].Visible = false;
                 }
             }

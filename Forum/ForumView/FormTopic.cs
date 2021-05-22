@@ -1,6 +1,6 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,12 +1,12 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.Interfaces;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.Interfaces;
+using ForumForumBusinessLogic.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ForumDatabaseImplement.Implements
+namespace ForumForumDatabaseImplement.Implements
 {
     public class ObjectStorage : IObjectStorage
     {
@@ -20,7 +20,7 @@ namespace ForumDatabaseImplement.Implements
                     ObjectViewModel model = new ObjectViewModel { };
                     model.Id = rec.Id;
                     model.Name = rec.Name;
-                    model.ObjectName = rec.ObjectName;
+                    model.ObjectName = context.Objects.FirstOrDefault(recrec => recrec.Id == rec.UpperObjectId)?.Name;
                     model.Description = rec.Description;
                     model.ObjectId = rec.UpperObjectId;
                     model.Topics = rec.Topics?
@@ -46,7 +46,7 @@ namespace ForumDatabaseImplement.Implements
                     ObjectViewModel mod = new ObjectViewModel { };
                     mod.Id = rec.Id;
                     mod.Name = rec.Name;
-                    mod.ObjectName = rec.ObjectName;
+                    mod.ObjectName = context.Objects.FirstOrDefault(recrec => recrec.Id == rec.UpperObjectId)?.Name;
                     mod.Description = rec.Description;
                     mod.ObjectId = rec.UpperObjectId;
                     mod.Topics = rec.Topics?
@@ -77,8 +77,8 @@ namespace ForumDatabaseImplement.Implements
                     {
                         Id = obj.Id,
                         Name = obj.Name,
-                        ObjectName = obj.ObjectName,
-                        Description = obj.Description,
+                        ObjectName = context.Objects.FirstOrDefault(recrec => recrec.Id == obj.UpperObjectId)?.Name,
+                Description = obj.Description,
                         ObjectId = obj.UpperObjectId,
                         Topics = obj.Topics
                             .ToDictionary(recT => (int)recT.Id,
@@ -142,18 +142,28 @@ namespace ForumDatabaseImplement.Implements
                 {
                     throw new Exception("Материал не найден");
                 }
+                RemoveDependencies(blank, context);
                 context.Objects.Remove(blank);
                 context.SaveChanges();
             }
         }
+
+        private void RemoveDependencies(Models.Object blank, ForumDatabase context)
+        {
+            foreach (var topic in context.Topics.Where(rec => rec.ObjectId == blank.Id)) {
+                topic.ObjectId = null;
+            }
+            context.SaveChanges();
+        }
+
         private Models.Object CreateModel(ObjectBindingModel model, Models.Object obj, ForumDatabase context)
         {
             obj.Name = model.Name;
             obj.Description = model.Description;
-            obj.UpperObjectId = (int)model.ObjectId;
-            Models.Object o = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId);
-            if (o != null) {
-                obj.ObjectName = o.Name;
+            obj.UpperObjectId = model.ObjectId;
+            if (model.ObjectId != null)
+            {
+                Models.Object o = context.Objects.FirstOrDefault(rec => rec.Id == model.ObjectId);           
             }           
             if (obj.Id == 0)
             {

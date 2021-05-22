@@ -1,14 +1,14 @@
-﻿using ForumBusinessLogic.Interfaces;
-using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.Interfaces;
+using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using ForumDatabaseImplement.Models;
+using ForumForumDatabaseImplement.Models;
 
-namespace ForumDatabaseImplement.Implements
+namespace ForumForumDatabaseImplement.Implements
 {
     public class MessageStorage: IMessageStorage
     {
@@ -24,10 +24,10 @@ namespace ForumDatabaseImplement.Implements
 						DateCreate=rec.DateCreate,
 						PersonId= (int)rec.PersonId,
 						ThreadId= (int)rec.ThreadId,
-						PersonName=rec.PersonName,
-						ThreadName=rec.ThreadName,
-						MessageText=rec.MessageText,
-						MessageId=rec.UpperMessageId
+						PersonName = context.Persons.FirstOrDefault(recrec => recrec.Id == rec.PersonId).Name,
+						ThreadName = context.Threads.FirstOrDefault(recrec => recrec.Id == rec.ThreadId).Name,
+						MessageText = context.Messages.FirstOrDefault(recrec => recrec.Id == rec.UpperMessageId).Text,
+						MessageId =rec.UpperMessageId
 					})
 					.ToList();
 			}
@@ -50,9 +50,9 @@ namespace ForumDatabaseImplement.Implements
 						DateCreate = rec.DateCreate,
 						PersonId = (int)rec.PersonId,
 						ThreadId = (int)rec.ThreadId,
-						PersonName = rec.PersonName,
-						ThreadName = rec.ThreadName,
-						MessageText = rec.MessageText,
+						PersonName = context.Persons.FirstOrDefault(recrec => recrec.Id == rec.PersonId).Name,
+						ThreadName = context.Threads.FirstOrDefault(recrec => recrec.Id == rec.ThreadId).Name,
+						MessageText = context.Messages.FirstOrDefault(recrec => recrec.Id == rec.UpperMessageId).Text,
 						MessageId = rec.UpperMessageId
 					})
 					.ToList();
@@ -80,9 +80,9 @@ namespace ForumDatabaseImplement.Implements
 						DateCreate = message.DateCreate,
 						PersonId = (int)message.PersonId,
 						ThreadId = (int)message.ThreadId,
-						PersonName = message.PersonName,
-						ThreadName = message.ThreadName,
-						MessageText = message.MessageText,
+						PersonName = context.Persons.FirstOrDefault(rec=>rec.Id==message.PersonId)?.Name,
+						ThreadName = context.Threads.FirstOrDefault(rec => rec.Id == message.ThreadId)?.Name,
+						MessageText = context.Messages.FirstOrDefault(rec => rec.Id == message.UpperMessageId)?.Text,
 						MessageId = message.UpperMessageId
 					} :
 					null;
@@ -150,11 +150,14 @@ namespace ForumDatabaseImplement.Implements
 		private Models.Message CreateModel(MessageBindingModel model, Models.Message message, ForumDatabase context)
 		{
 			message.Text = model.Text;
-			message.ThreadId = (int)model.ThreadId;
-			message.PersonId = (int)model.PersonId;
-			message.UpperMessageId = (int)model.MessageId;
 			if (message.Id == 0)
 			{
+				message.ThreadId = model.ThreadId;
+				message.ThreadName = context.Threads.FirstOrDefault(rec => rec.Id == model.ThreadId)?.Name;
+				message.PersonId = (int)model.PersonId;
+				message.PersonName = context.Persons.FirstOrDefault(rec => rec.Id == model.PersonId)?.Name;
+				message.UpperMessageId = (int)model.MessageId;
+				message.MessageText = context.Messages.FirstOrDefault(rec => rec.Id == model.MessageId)?.Text;
 				context.Messages.Add(message);
 				context.SaveChanges();
 			}

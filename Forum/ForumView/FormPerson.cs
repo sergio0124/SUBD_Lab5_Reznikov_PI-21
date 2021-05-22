@@ -1,6 +1,6 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -83,6 +83,7 @@ namespace ForumView
             if (id.HasValue)
             {
                 PersonViewModel model = person.Read(new PersonBindingModel { Id = id })?[0];
+                var topics = 
                 textBox1.Text = model.Name;
                 textBox2.Text = model.Status;
             }

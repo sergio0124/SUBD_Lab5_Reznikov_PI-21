@@ -1,5 +1,5 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,6 +58,7 @@ namespace ForumView
             {
                 var form = Container.Resolve<FormThread>();
                 form.id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                form.LoadData();
                 form.ShowDialog();
                 LoadData();
             }

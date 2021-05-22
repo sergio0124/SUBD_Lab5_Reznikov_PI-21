@@ -1,6 +1,6 @@
-﻿using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.Interfaces;
-using ForumDatabaseImplement.Implements;
+﻿using ForumForumBusinessLogic.BusinessLogics;
+using ForumForumBusinessLogic.Interfaces;
+using ForumForumDatabaseImplement.Implements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,10 @@ namespace ForumView
 {
     static class Program
     {
+        public static class Globals
+        {
+            public static int? personId = null;
+        }
         [STAThread]
         static void Main()
         {

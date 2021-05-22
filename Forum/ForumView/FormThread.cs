@@ -1,6 +1,6 @@
-﻿using ForumBusinessLogic.BindingModels;
-using ForumBusinessLogic.BusinessLogics;
-using ForumBusinessLogic.ViewModels;
+﻿using ForumForumBusinessLogic.BindingModels;
+using ForumForumBusinessLogic.BusinessLogics;
+using ForumForumBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,12 +21,14 @@ namespace ForumView
         private TopicLogic topic;
         private MessageLogic message;
         private ThreadLogic thread;
-        public FormThread(TopicLogic topicLogic, MessageLogic messageLogic, ThreadLogic threadLogic)
+        private PersonLogic person;
+        public FormThread(TopicLogic topicLogic, MessageLogic messageLogic, ThreadLogic threadLogic, PersonLogic personLogic)
         {
             InitializeComponent();
             topic = topicLogic;
             message = messageLogic;
             thread = threadLogic;
+            person = personLogic;
             List<TopicViewModel> list = topic.Read(null);
             if (list != null)
             {
@@ -35,31 +37,45 @@ namespace ForumView
                 comboBox.DataSource = list;
                 comboBox.SelectedItem = null;
             }
+            List<PersonViewModel> listlist = person.Read(null);
+            if (listlist != null)
+            {
+                comboBoxPerson.DisplayMember = "Name";
+                comboBoxPerson.ValueMember = "Id";
+                comboBoxPerson.DataSource = listlist;
+                comboBoxPerson.SelectedItem = null;
+            }
             LoadData();
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             if (id.HasValue)
             {
                 Dictionary<int, string> mes = thread.Read(new ThreadBindingModel { Id = id })?[0].Messages;
-                foreach (var message in mes)
+                foreach (var m in mes)
                 {
-                    dataGridView.Rows.Add(new object[] { message.Key, message.Value });
+                    dataGridView.Rows.Add(m.Key, m.Value );
                 }
+                ThreadViewModel thr = thread.Read(new ThreadBindingModel { Id = id })?[0];
+                textBoxDescription.Text = thr.Description;
+                textBoxName.Text = thr.Name;
+                comboBoxPerson.Enabled = false;
+                comboBox.Enabled = false;
             }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormMessage>();
+            form.ThrId = id;
             form.ShowDialog();
             LoadData();
         }
 
         private void buttonRef_Click(object sender, EventArgs e)
         {
-            if (comboBox.SelectedValue == null)
+            if (dataGridView.SelectedRows == null)
             {
                 MessageBox.Show("Выберите сообщение", "Ошибка",
                MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -67,7 +83,7 @@ namespace ForumView
             }
             var form = Container.Resolve<FormMessage>();
             form.id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-            form.ThreadId = (int)id;
+            form.ThrId = id;
             form.ShowDialog();
             LoadData();
         }
@@ -114,13 +130,30 @@ namespace ForumView
             }
             try
             {
-                thread.CreateOrUpdate(new ThreadBindingModel
+                if (id.HasValue)
                 {
-                    Description = textBoxDescription.Text,
-                    Name = textBoxName.Text,
-                    Id = id,
-                    TopicId = Convert.ToInt32(comboBox.SelectedValue)
-                });
+                    thread.CreateOrUpdate(new ThreadBindingModel
+                    {
+                        Description = textBoxDescription.Text,
+                        Name = textBoxName.Text,
+                        Id = id
+                    });
+                }
+                else {
+                    if (comboBoxPerson.SelectedValue == null)
+                    {
+                        MessageBox.Show("Заполните поле Person", "Ошибка",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    thread.CreateOrUpdate(new ThreadBindingModel
+                    {
+                        Description = textBoxDescription.Text,
+                        Name = textBoxName.Text,
+                        PersonId = Convert.ToInt32(comboBoxPerson.SelectedValue),
+                        TopicId = Convert.ToInt32(comboBox.SelectedValue)
+                    });
+                }              
             }
             catch (Exception ex)
             {

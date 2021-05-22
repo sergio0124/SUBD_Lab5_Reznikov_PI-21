@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ForumDatabaseImplement.Models
+namespace ForumForumDatabaseImplement.Models
 {
     public class Object
     {
@@ -13,8 +13,7 @@ namespace ForumDatabaseImplement.Models
         public string Name { set; get; }
         [Required]
         public string Description { set; get; }
-        public string ObjectName { set; get; }
-        public int UpperObjectId { set; get; }
+        public int? UpperObjectId { set; get; }
         [ForeignKey("ObjectId")]
         public virtual List<Topic> Topics { set; get; }
     }
